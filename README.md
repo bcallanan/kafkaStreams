@@ -18,7 +18,7 @@ Advance concepts exploration of Aggregations, Joins(eg. think of sql table joins
        tables as long as the condition is satisfied. This 'inner' keyword will create the
        result-set by combining all rows from both the tables where the condition satisfies
        i.e value of the common field will be the same. Again, the cross section. 
-     - <b>Outer Join(Full Join)</b>: FULL OUTER JOIN(Some databases use the keywords optionally)
+     - <b>Outer Join(Full Join)</b>: 'Full' 'Outer' join(Some databases use the keywords optionally)
        creates the result-set by combining results of both LEFT JOIN and RIGHT JOIN. The
        result-set will contain all the rows from both tables. For the rows for which there
        is no matching, the result-set will contain NULL values.
@@ -137,12 +137,8 @@ In a topology, the source processor is the key component in the topology. It is 
         based on the complete history of the stream data, KTable can be used to maintain the latest
         state for each key. It allows you to update and process the table based on new incoming
         records.
-        
-
 
 KStream is an abstraction in Kafka Streams which holds or has access to each event in the kafka Topic.
-
-
 
 ##### Joins
 
@@ -160,6 +156,5 @@ When performing a join operation between a KTable and a KStream in Apache Kafka’
     If there is no matching record in either the KTable or the KStream for a particular key, a null value
     will be included in the result.
       
-The resulting KStream from the join operation can be further processed, filtered, transformed, or aggregated using the available operators and functions in Kafka Streams. It allows you to perform various operations on the joined stream to derive insights or produce the desired output based on your application requirements.
+The resulting KStream from the join operation can be further processed, filtered, transformed, or aggregated using the available operators and functions in Kafka Streams. It allows you to perform various operations on the joined stream to derive insights or produce the desired output based on your application requirements. Kafka Streams provides flexibility and allows you to perform joins between KStreams and KTables in different ways. You can use the leftJoin() or outerJoin() methods to explicitly perform left or outer joins, where the result retains both the characteristics of the KStream and the KTable. This flexibility enables you to choose the appropriate join type based on your specific use case and requirements.
 
-W
