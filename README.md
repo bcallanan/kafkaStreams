@@ -109,33 +109,34 @@ At any given, the topology only processes one record at a time. With Sub-Topolog
 
 In a topology, the source processor is the key component in the topology. It is the component which has access to the topic data records and supplies the data records to the whole topology. The source processor has two design options to implement the solution, and when to use them:
 
-    1) KStream:
+   1) KStream:
         - Continuous Stream Processing: If you have a continuous stream of records where new data is
-          continuously appended, and you need to perform transformations, filtering, aggregations, or complex
-          stream processing operations, KStream is a suitable choice. KStream allows you to process the data
-          as it arrives and maintain stateful operations.
+          continuously appended, and you need to perform transformations, filtering, aggregations, or
+          complex stream processing operations, KStream is a suitable choice. KStream allows you to
+          process the data as it arrives and maintain stateful operations.
         - Real-time Analytics: If your use case involves real-time analytics, where you need to compute
-          aggregations over time windows, perform sliding window operations, or derive insights from the
-          stream of records, KStream is a good fit. It enables you to perform various analytical operations
-          on the stream data.
-        - Complex Stream Transformations: When you require complex transformations and operations on the
-          stream data, such as mapping, filtering, branching, or joining multiple streams together, KStream
-          provides the necessary flexibility and functionality. It allows you to manipulate and transform the
-          stream records based on your application logic.
-    1) KTable:  
-        - Materialized Views: If you need to maintain the latest state of the stream data for each key and
-          perform point lookups efficiently, KTable is a suitable choice. KTable can be used to build
-          materialized views of the stream, where you can retrieve the current value for a specific key
-          quickly.
-        - Table Joins: If your use case involves joining the stream data with other tables or streams based
-          on a common key, KTable provides a convenient way to perform these joins. It allows you to join
-          KTables or KStreams together efficiently based on their keys.
-        - Interactive Queries: When you need to support interactive queries and retrieve the latest value
-          for a specific key in real-time, KTable is a good option. KTable maintains the latest value for
-          each key, making it efficient for point lookups and queries.
-        - Stateful Processing: If your application requires maintaining state and processing records based
-          on the complete history of the stream data, KTable can be used to maintain the latest state for
-          each key. It allows you to update and process the table based on new incoming records.
+          aggregations over time windows, perform sliding window operations, or derive insights from
+          the stream of records, KStream is a good fit. It enables you to perform various analytical
+          operations on the stream data.
+        - Complex Stream Transformations: When you require complex transformations and operations on
+          the stream data, such as mapping, filtering, branching, or joining multiple streams together,
+          KStream provides the necessary flexibility and functionality. It allows you to manipulate
+          and transform the stream records based on your application logic.
+   1) KTable:  
+        - Materialized Views: If you need to maintain the latest state of the stream data for each key
+          and perform point lookups efficiently, KTable is a suitable choice. KTable can be used to
+          build materialized views of the stream, where you can retrieve the current value for a 
+          specific key quickly.
+        - Table Joins: If your use case involves joining the stream data with other tables or streams
+          based on a common key, KTable provides a convenient way to perform these joins. It allows
+          you to join KTables or KStreams together efficiently based on their keys.
+        - Interactive Queries: When you need to support interactive queries and retrieve the latest
+          value for a specific key in real-time, KTable is a good option. KTable maintains the latest
+          value for each key, making it efficient for point lookups and queries.
+        - Stateful Processing: If your application requires maintaining state and processing records
+          based on the complete history of the stream data, KTable can be used to maintain the latest
+          state for each key. It allows you to update and process the table based on new incoming
+          records.
         
 
 
@@ -147,9 +148,10 @@ KStream is an abstraction in Kafka Streams which holds or has access to each eve
 
 When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
 
-    - Inner Join: An inner join between a KTable and a KStream will produce a new KStream that includes
-      only the records where there is a match between the key of the KTable and the key of the KStream.
-      The result will contain the joined records, combining the values from both the KTable and the KStream.
+    - Inner Join: An inner join between a KTable and a KStream will produce a new KStream that
+      includes only the records where there is a match between the key of the KTable and the key
+      of the KStream. The result will contain the joined records, combining the values from both
+      the KTable and the KStream.
     - Left Join: A left join between a KTable and a KStream will produce a new KStream that includes all
       records from the KStream, along with matching records from the KTable. If there is no matching record
       in the KTable for a particular key in the KStream, a null value will be included in the result.
