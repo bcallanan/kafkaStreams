@@ -138,8 +138,77 @@ In a topology, the source processor is the key component in the topology. It is 
         state for each key. It allows you to update and process the table based on new incoming
         records.
 
-KStream is an abstraction in Kafka Streams which holds or has access to each event in the kafka Topic.
+KStream is an abstraction in Kafka Streams which holds or has access to each event in the kafka Topic. In simple terms, the api basically has immediate access to the topic events when they are posted into the source processor.
 
+![Alt text](./StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
+ 
+Each Kafka Event Record is handle independently of one another. Each event is executed by the whole topology before the next even in the topic is processed. The source processor, stream processor, and sink processor each completes their task before moving on to the next record. Key bullets to understand here:
+
+    - KStreams api provide access to all the records in the Kafka Topic.
+    - KStreams treats each event independent of one another.
+    - Each event will be executed by the whole topology.
+    - Any new event record added to the topic will be made available to the KStream API.
+    - The KStream API can also be call a record stream or a log stream
+    - The KStream/Record Stream is infinite. It just keep adding on to the end.
+
+##### Simple Transform Example
+
+A simple producer/consumer model where a producer, produces records into a kafka topic. The KStream API processes the topic records and transforms the topic into an uppercase topic.  We'll use the greetings producer/consumer micro service from the Kafka Avro respository.
+
+![Alt text](./KafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
+
+##### Stream Filter with KStreams     
+
+Slightly different from the Java8 predicate implementation, the KStreams filter and filterNot is a bit cleaner than what we see in the core java implementation:
+
+    Core Java
+      Stream.of(1, 2, 3, 4, 5, 6, 7)
+         .filter(((Predicate) c -> c % 2 == 0).negate())
+    or
+      public static <R> Predicate<R> not(Predicate<R> predicate) {
+        return predicate.negate();
+      }     
+      
+      Stream.of(1, 2, 3, 4, 5, 6, 7)
+        .filter(not(c -> c % 2 == 0))
+        
+        
+    Kstream filter/filterNot
+    
+        modifiedKStreamValues = greetingStream
+            .filterNot(( key, value) -> value.length() > 5 )
+            .mapValues( (readOnlyKey, value) -> value.toUpperCase());
+        
+In the above example, only those event record whose value's length is < 5 long will be transformed. So, "hi" is uppercased, but "hello world" is not.         
+
+    Producer
+    [appuser@broker ~]$ kafka-console-producer --bootstrap-server broker:9092 --topic greetings
+    >hi
+    >hellow
+    >hix2
+    Consumer
+    [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning
+    HI
+    HIX2
+
+    You'll notice the absence of 'hellow' from the topic output. It didn't get processed by the 'filterNot'.
+    
+##### Stream Map & MapValue Operator with KStreams     
+
+As we saw from the example above, the Kafka KStreams API has some suble differences from the JAVA 8 standard APIs for Streams. In his case, the KStreams api provided the <i><b>mapValues</b></i> apis operator. 
+
+     .mapValues( (readOnlyKey, value) -> value.toUpperCase());
+
+Here the 'key' is immutable. However, the value is transformable. In the regular <i><b>map</b></i> both key and value are transformable.
+
+     .map( (key, value) -> KeyValue.pair( key.toUpperCase(), value.toUpperCase()));
+
+To see this transformation, both a kay and value must be supplied to the producer record.
+
+    Producer
+    [appuser@broker ~]$ kafka-console-producer --bootstrap-server broker:9092 --topic greetings
+    >hi
+              
 ##### Joins
 
 When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
