@@ -142,7 +142,7 @@ KStream is an abstraction in Kafka Streams which holds or has access to each eve
 
 ![Alt text](./StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
  
-Each Kafka Event Record is handle independently of one another. Each event is executed by the whole topology before the next even in the topic is processed. The source processor, stream processor, and sink processor each completes their task before moving on to the next record. Key bullets to understand here:
+Each Kafka Event Record is handle independently of one another. Each event is executed by the whole topology before the next event in the topic is processed. The source processor, stream processor, and sink processor each completes their task before moving on to the next record. Key bullets to understand here:
 
     - KStreams api provide access to all the records in the Kafka Topic.
     - KStreams treats each event independent of one another.
@@ -155,7 +155,7 @@ Each Kafka Event Record is handle independently of one another. Each event is ex
 
 A simple producer/consumer model where a producer, produces records into a kafka topic. The KStream API processes the topic records and transforms the topic into an uppercase topic.  We'll use the greetings producer/consumer micro service from the Kafka Avro respository.
 
-![Alt text](./KafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
+![Alt text](./kafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
 
 ##### Stream Filter with KStreams     
 
