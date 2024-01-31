@@ -28,7 +28,11 @@ Writing interactive Queries to exposed the aggregated data using a RESTful apis 
 
 Unit and Integration using JUnit 5 as well.
 
+<details open>
+  <summary>(Show/hide Example KStreams API design)</summary>
+
 ![Alt text](./kafkaStreams.jpg?raw=true "Kafka Streams")
+</details>
 
 There are many types of use cases for using Kafka Streams API, a few are:
 
@@ -38,7 +42,11 @@ There are many types of use cases for using Kafka Streams API, a few are:
  - aggregating the data
  - joining the data from multiple kafka topics and writing back to a topic. This addresses the immutability concept of kafka data before the consumer(s) services receive the data. 
 
+<details open>
+  <summary>(Show/hide Example KStreams API design II)</summary>
+
 ![Alt text](./kafkaStreamAsAProducerConsumer.jpg?raw=true "Kafka Streams - producer/consumer")
+</details>
 
 The kafka Streams API uses the Java8 Functional programming style and DSL. 
  - Lambdas
@@ -87,22 +95,31 @@ Kafka stream processing has a series of processors:
     
   The concept of designing the Kafka Stream processing in this way is a Directed Acyclic Graph (DAG). Which means, these are connected nodes and are directly related to each other. This a flat DAG and has no parent(s). This DAG design as a Kafka Stream is called the Kafka Stream "Topology".
   
-![Alt text](./FlatStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+<details open>
+  <summary>(Show/hide flat topology design)</summary>
 
+![Alt text](./FlatStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+</details>
 
 ##### Stream Branching
 
 More evolved topologies may be required for some designs to produce an aggregation or branch topology. This is called a sub-topology. Maybe easier to call it a tree topology, at least IMO anyway. 
 
-![Alt text](./TreeStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+<details open>
+  <summary>(Show/hide branch or tree topology design)</summary>
 
+![Alt text](./TreeStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+</details
 
 ##### Data Flow
 
 At any given, the topology only processes one record at a time. With Sub-Topology(s) this rule is applicable to each Sub-Topology. This is how order is maintain should a topic have some type of order required.
 
-![Alt text](./StreamProcessingDataFlow.jpg?raw=true "Kafka Streams - Stream Processing")
+<details>
+  <summary>(Show/hide Dataflow design)</summary>
 
+![Alt text](./StreamProcessingDataFlow.jpg?raw=true "Kafka Streams - Stream Processing")
+</details
 
 ##### KStreams API
 
@@ -140,7 +157,12 @@ In a topology, the source processor is the key component in the topology. It is 
 
 KStream is an abstraction in Kafka Streams which holds or has access to each event in the kafka Topic. In simple terms, the api basically has immediate access to the topic events when they are posted into the source processor.
 
+<details>
+  <summary>(Show/hide KStream Abstraction for event record processing)</summary>
+
 ![Alt text](./StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
+
+</details>
  
 Each Kafka Event Record is handle independently of one another. Each event is executed by the whole topology before the next event in the topic is processed. The source processor, stream processor, and sink processor each completes their task before moving on to the next record. Key bullets to understand here:
 
@@ -155,11 +177,18 @@ Each Kafka Event Record is handle independently of one another. Each event is ex
 
 A simple producer/consumer model where a producer, produces records into a kafka topic. The KStream API processes the topic records and transforms the topic into an uppercase topic.  We'll use the greetings producer/consumer micro service from the Kafka Avro respository.
 
+<details>
+  <summary>(Show/hide simple producer/consumer design)</summary>
+
 ![Alt text](./kafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
+</details>
 
 ##### Stream Filter with KStreams     
 
 Slightly different from the Java8 predicate implementation, the KStreams filter and filterNot is a bit cleaner than what we see in the core java implementation:
+
+<details>
+  <summary>(Show/hide Example core java .vs. KStreams API here)</summary>
 
     Core Java
       Stream.of(1, 2, 3, 4, 5, 6, 7)
@@ -178,37 +207,111 @@ Slightly different from the Java8 predicate implementation, the KStreams filter 
         modifiedKStreamValues = greetingStream
             .filterNot(( key, value) -> value.length() > 5 )
             .mapValues( (readOnlyKey, value) -> value.toUpperCase());
+
+</details>
         
 In the above example, only those event record whose value's length is < 5 long will be transformed. So, "hi" is uppercased, but "hello world" is not.         
 
-    Producer
-    [appuser@broker ~]$ kafka-console-producer --bootstrap-server broker:9092 --topic greetings
-    >hi
-    >hellow
-    >hix2
-    Consumer
-    [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning
-    HI
-    HIX2
-
-    You'll notice the absence of 'hellow' from the topic output. It didn't get processed by the 'filterNot'.
+<details>
+  <summary>(Show/hide Kafka CLI Commands to see example above)</summary>
     
-##### Stream Map & MapValue Operator with KStreams     
+    Producer
+     [appuser@broker ~]$ kafka-console-producer --bootstrap-server broker:9092 --topic greetings
+     >hi
+     >hellow
+     >hix2
+    Consumer
+     [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning
+     HI
+     HIX2
+</details>
+
+You'll notice the absence of 'hellow' from the topic output. It didn't get processed by the 'filterNot'.
+    
+##### Stream Map & Map Values Operators with KStreams     
 
 As we saw from the example above, the Kafka KStreams API has some suble differences from the JAVA 8 standard APIs for Streams. In his case, the KStreams api provided the <i><b>mapValues</b></i> apis operator. 
 
      .mapValues( (readOnlyKey, value) -> value.toUpperCase());
 
-Here the 'key' is immutable. However, the value is transformable. In the regular <i><b>map</b></i> both key and value are transformable.
+Here, above, the 'key' is immutable. However, the value is transformable. In the <i><b>map</b></i>, below, both key and value are transformable.
 
      .map( (key, value) -> KeyValue.pair( key.toUpperCase(), value.toUpperCase()));
 
-To see this transformation, both a kay and value must be supplied to the producer record.
+To see this transformation, both a key and value must be supplied to the producer record.
+
+<details>
+  <summary>(Show/hide Kafka CLI Commands to see 'map' example above)</summary>
 
     Producer
-    [appuser@broker ~]$ kafka-console-producer --bootstrap-server broker:9092 --topic greetings
-    >hi
-              
+     [appuser@broker ~]$ kafka-console-producer --topic greetings --property "parse.key=true" --property "key.separator=:" --broker-list broker:9092
+     >hi:there
+     >hi:foo
+
+    Consumer
+     [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property print.key=true --property key.separator=":"
+     HI:THERE
+     HI:FOO
+</details>
+    
+##### Stream Flat Map & Flat Map Values Operators with KStreams     
+
+As above examples, map and map values, the Flat Map and Flat Map Values operators within KStreams have evolved over the Java 8 examples. These two operators act the same way as the prior two operators as a transformable operation on the event record. 
+
+<details>
+  <summary>(Show/hide Flat Map details)</summary>
+
+     KStream<String, String> modifiedKStreamValues = greetingStream
+             .filter(( key, value) -> value.length() > 5 )
+             .flatMap(( key, value ) -> {
+                List<String> newValueList = Arrays.asList( value.split( "-" ));
+                List<KeyValue<String, String>> modStreamList = newValueList
+                    .stream()
+                    .map( splitValue -> KeyValue.pair( key.toUpperCase(), splitValue))
+                    .collect( Collectors.toList());
+                 
+                 return modStreamList;
+             });
+             
+      Produced event records yields the following:
+      
+      flatMapValues is slightly different and provides on the values
+      .flatMapValues( (key, val) -> {
+          List<String> newValueList = Arrays.asList( val.split( "-" ));
+               List<String> modStreamList = newValueList
+                            .stream()
+                            .map( String::toUpperCase )
+                            .collect( Collectors.toList());
+            
+                    return modStreamList;
+                });
+       
+      [appuser@broker ~]$ kafka-console-producer --topic greetings --property "parse.key=true" --property "key.separator=:" --broker-list broker:9092
+      >datatype:list-map-vector-array
+
+      [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property print.key=true --property key.separator=":"
+      DATATYPE:list
+      DATATYPE:map
+      DATATYPE:vector
+      DATATYPE:array
+             
+</details>
+
+##### <i><b>Degugging - Important </b></i>
+
+So what if your code isnt doing what you think or you need more insight into what the KStream is doing with you topic event record. Well, there's a way!  <i><b>Peek</b></i>
+
+<details>
+  <summary>(Show/hide Debugging with peek)</summary>
+  
+        KStream<String, String> modifiedKStreamValues = greetingStream
+                .filter(( key, value) -> value.length() > 5 )
+                .peek( (key, value) -> {
+                    log.debug( "after filter key {} : value {}", key, value );
+                })
+            .mapValues( (readOnlyKey, value) -> value.toUpperCase())
+</details>
+
 ##### Joins
 
 When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
