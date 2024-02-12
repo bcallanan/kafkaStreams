@@ -12,6 +12,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
@@ -60,11 +61,14 @@ public class KafkaStreamApp {
         props.put( StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.99.108:39092");
         props.put( ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         
+        props.put( StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
+        props.put( StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
+        
         KafkaStreamApp app = new KafkaStreamApp();
         app.createTopics( props,
-                Arrays.asList( KStreamTopology.GREETINGS, KStreamTopology.GREETINGS_UPPERCASE));
+                Arrays.asList( KStreamTopology.GREETINGS, KStreamTopology.GREETINGS_UPPERCASE, KStreamTopology.GREETINGS_MERGED));
         
-        Topology topology = KStreamTopology.buildTopology();
+        Topology topology = KStreamTopology.buildOptimizedAndCustomSerdeTopology();
         
         KafkaStreams kafkaStreams = new KafkaStreams( topology, props );
         try {

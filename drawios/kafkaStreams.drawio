@@ -1,0 +1,172 @@
+<mxfile host="app.diagrams.net" modified="2024-01-19T13:46:20.400Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" etag="lndBAHtyM4ly8i0xNHTg" version="22.1.17" type="google" pages="2">
+  <diagram name="Page-1" id="6tKYj15fQL-WdANzBw2b">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="20_zTeO8JSOPjomDWpty-16" value="" style="group" connectable="0" vertex="1" parent="1">
+          <mxGeometry x="250" width="600" height="290" as="geometry" />
+        </mxCell>
+        <UserObject label="kafka Broker 1" treeRoot="1" id="4KKmeeYYDXLmDTA8UojI-4">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+            <mxGeometry x="180" y="120" width="90" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="Kafka Broker N" treeRoot="1" id="4KKmeeYYDXLmDTA8UojI-6">
+          <mxCell style="whiteSpace=wrap;html=1;align=center;treeFolding=1;treeMoving=1;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;startArrow&quot;:&quot;none&quot;,&quot;endArrow&quot;:&quot;none&quot;};" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+            <mxGeometry x="325" y="120" width="90" height="40" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="20_zTeO8JSOPjomDWpty-1" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16" source="4KKmeeYYDXLmDTA8UojI-4" target="4KKmeeYYDXLmDTA8UojI-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="260" as="sourcePoint" />
+            <mxPoint x="500" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-2" value="Consumer App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="470" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-3" value="Producer App" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-4" value="Kafka Source Connector API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry y="80" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-5" value="Kafka Sink Connector API" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="510" y="80" width="90" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-6" value="Kafka Streams" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="170" y="230" width="260" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-7" value="Kafka Connect" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="480" y="220" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-8" value="Kafka Connect" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="15" y="220" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-9" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="224.5" y="220" as="sourcePoint" />
+            <mxPoint x="224.5" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-10" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="170" as="sourcePoint" />
+            <mxPoint x="380" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-11" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="140" as="sourcePoint" />
+            <mxPoint x="500" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="144.5" as="sourcePoint" />
+            <mxPoint x="170" y="144.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-13" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="420" y="110" as="sourcePoint" />
+            <mxPoint x="470" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-14" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="70" as="sourcePoint" />
+            <mxPoint x="170" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="20_zTeO8JSOPjomDWpty-15" value="&lt;b&gt;&lt;font color=&quot;#0000ff&quot;&gt;Area covered here in this git repo&amp;nbsp;&lt;/font&gt;&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=bottom;strokeColor=#0000FF;" vertex="1" parent="20_zTeO8JSOPjomDWpty-16">
+          <mxGeometry x="150" y="220" width="300" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="TjX8Dufsh6M4SfO8pbeA" name="Page-2">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="jQN7IbMDCtW8k7KpFkmb-4" target="52nfHYfoAG056sIJ6zT6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-4" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="20" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-5" value="Spring Boot, SpringWeb, Security, Spring DataJPA Postgres,&lt;br&gt;spring Kafka" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="500" y="50" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-7" value="Crowdstrike, palo alto fw&lt;br&gt;VMX Router" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="230" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-9" value="postgres" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="545" y="380" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-12" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;u style=&quot;background-color: initial;&quot;&gt;Interested&amp;nbsp; topic criteria&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;1) Customer FNN&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;2) Crowstrike vulerabilites&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;3) Blocked Sites accessed&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;4) Customer SRC IP&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;5) Customer email address&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;Entity Record&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="620" y="400" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="jQN7IbMDCtW8k7KpFkmb-14" value="Notification Service(SMTP)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="50" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-2" value="Kafka" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="230" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-3" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="jQN7IbMDCtW8k7KpFkmb-5" target="52nfHYfoAG056sIJ6zT6-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="450" y="130" as="sourcePoint" />
+            <mxPoint x="400" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-4" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="52nfHYfoAG056sIJ6zT6-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="280" as="sourcePoint" />
+            <mxPoint x="350" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="52nfHYfoAG056sIJ6zT6-6" target="jQN7IbMDCtW8k7KpFkmb-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-6" value="Spring Boot, SpringWeb, Security, Spring DataJPA Postgres,&lt;br&gt;spring Kafka" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="500" y="210" width="150" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-7" value="Notification Service(SMTP)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="210" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-8" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;u style=&quot;background-color: initial;&quot;&gt;Consumed topics&lt;/u&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="540" y="480" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-16" value="" style="group" connectable="0" vertex="1" parent="1">
+          <mxGeometry x="650" y="50" width="50" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-11" value="Tomcat1&lt;br&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;horizontal=1;verticalAlign=top;" vertex="1" parent="52nfHYfoAG056sIJ6zT6-16">
+          <mxGeometry width="50" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-15" value="AngularApp" style="rounded=1;whiteSpace=wrap;html=1;direction=south;horizontal=0;" vertex="1" parent="52nfHYfoAG056sIJ6zT6-16">
+          <mxGeometry x="10" y="30" width="30" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-17" value="" style="group" connectable="0" vertex="1" parent="1">
+          <mxGeometry x="650" y="210" width="50" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-18" value="TomcatN" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;horizontal=1;verticalAlign=top;" vertex="1" parent="52nfHYfoAG056sIJ6zT6-17">
+          <mxGeometry width="50" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-19" value="AngularApp" style="rounded=1;whiteSpace=wrap;html=1;direction=south;horizontal=0;" vertex="1" parent="52nfHYfoAG056sIJ6zT6-17">
+          <mxGeometry x="10" y="30" width="30" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-20" value="Load Balancer" style="rounded=0;whiteSpace=wrap;html=1;horizontal=0;" vertex="1" parent="1">
+          <mxGeometry x="710" width="10" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-22" value="Server Platform&lt;br&gt;Core Platform and Services" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="500" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="52nfHYfoAG056sIJ6zT6-23" value="Resource Executive(BE) Drivers" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="290" width="80" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

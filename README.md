@@ -31,7 +31,7 @@ Unit and Integration using JUnit 5 as well.
 <details open>
   <summary>(Show/hide Example KStreams API design)</summary>
 
-![Alt text](./kafkaStreams.jpg?raw=true "Kafka Streams")
+![Alt text](./drawios/kafkaStreams.jpg?raw=true "Kafka Streams")
 </details>
 
 There are many types of use cases for using Kafka Streams API, a few are:
@@ -45,7 +45,7 @@ There are many types of use cases for using Kafka Streams API, a few are:
 <details open>
   <summary>(Show/hide Example KStreams API design II)</summary>
 
-![Alt text](./kafkaStreamAsAProducerConsumer.jpg?raw=true "Kafka Streams - producer/consumer")
+![Alt text](./drawios/kafkaStreamAsAProducerConsumer.jpg?raw=true "Kafka Streams - producer/consumer")
 </details>
 
 The kafka Streams API uses the Java8 Functional programming style and DSL. 
@@ -93,12 +93,28 @@ Kafka stream processing has a series of processors:
  - <b>Stream Processor</b>: processing logic - Aggregating, transforming, or joining the data. This is where the data enrichment happens.
  - <b>Sink Processor</b>: destination topic or end of the line.
     
-  The concept of designing the Kafka Stream processing in this way is a Directed Acyclic Graph (DAG). Which means, these are connected nodes and are directly related to each other. This a flat DAG and has no parent(s). This DAG design as a Kafka Stream is called the Kafka Stream "Topology".
-  
+The concept of designing the Kafka Stream processing in this way is a Directed Acyclic Graph (DAG). Which means, these are connected nodes and are directly related to each other. This a flat DAG and has no parent(s). This DAG design as a Kafka Stream and is called the Kafka Stream "Topology". The reason behind this naming scheme is simple, there's a KStream Class that represents it. 
+
+    /** 
+     * A topology is an acyclic graph of sources, processors, and sinks.
+     *
+     * The SourceNode is the node in the graph that consumes one or more Kafka topics and
+     * forwards them to its successor nodes.
+     * A ProcessorNode is the node in the graph that receives input records from
+     * upstream nodes, processes the records, and optionally forwarding new records
+     * to one or all of its downstream nodes.
+     * Finally, a SinkNode is the node in the graph that receives records from upstream
+     * nodes and writes them to a Kafka topic.
+     *
+     * There's more doc in the API. I stole these tid-bits from there.
+     */
+    package org.apache.kafka.streams.processor.internals.namedtopology;
+    public class NamedTopology extends Topology {
+    
 <details open>
   <summary>(Show/hide flat topology design)</summary>
 
-![Alt text](./FlatStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](./drawios/FlatStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
 </details>
 
 ##### Stream Branching
@@ -108,7 +124,7 @@ More evolved topologies may be required for some designs to produce an aggregati
 <details open>
   <summary>(Show/hide branch or tree topology design)</summary>
 
-![Alt text](./TreeStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](./drawios/TreeStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
 </details
 
 ##### Data Flow
@@ -118,7 +134,7 @@ At any given, the topology only processes one record at a time. With Sub-Topolog
 <details>
   <summary>(Show/hide Dataflow design)</summary>
 
-![Alt text](./StreamProcessingDataFlow.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](./drawios/StreamProcessingDataFlow.jpg?raw=true "Kafka Streams - Stream Processing")
 </details
 
 ##### KStreams API
@@ -160,7 +176,7 @@ KStream is an abstraction in Kafka Streams which holds or has access to each eve
 <details>
   <summary>(Show/hide KStream Abstraction for event record processing)</summary>
 
-![Alt text](./StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
+![Alt text](./drawios/StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
 
 </details>
  
@@ -180,7 +196,7 @@ A simple producer/consumer model where a producer, produces records into a kafka
 <details>
   <summary>(Show/hide simple producer/consumer design)</summary>
 
-![Alt text](./kafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
+![Alt text](./drawios/kafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
 </details>
 
 ##### Stream Filter with KStreams     
@@ -299,7 +315,7 @@ As above examples, map and map values, the Flat Map and Flat Map Values operator
 
 ##### <i><b>Degugging - Important </b></i>
 
-So what if your code isnt doing what you think or you need more insight into what the KStream is doing with you topic event record. Well, there's a way!  <i><b>Peek</b></i>
+So, what if your code isn't doing what you think or you need more insight into what the KStream is doing with your topic event record. Well, there's a way and an excellent way to do this in production!  <i><b>Peek</b></i>. This is a better way than using the print operator.
 
 <details>
   <summary>(Show/hide Debugging with peek)</summary>
@@ -310,8 +326,100 @@ So what if your code isnt doing what you think or you need more insight into wha
                     log.debug( "after filter key {} : value {}", key, value );
                 })
             .mapValues( (readOnlyKey, value) -> value.toUpperCase())
+            
+            
+        // has its uses but not while procesing the stream itself.
+        if ( log.isDebugEnabled() ) {
+           greetingStream.print(Printed.< String, String> toSysOut().withLabel(GREETINGS));
+        }    
 </details>
 
+##### Merge(s)
+
+This operations is used to combine two independent Kaka Streams into a single Kafka Stream. The two streams aren't merged into one record. It is basically funneling two topics into one topic. 
+
+<details>
+  <summary>(Show/hide simple Merged Topology)</summary>
+
+![Alt text](./drawios/MergedStreamProcessingTopology.jpg?raw=true "Kafka Streams - Merged")
+</details>
+
+ 
+<details>
+  <summary>(Show/hide Some implementation details)</summary>
+
+    public static Topology buildMergeTopology() {
+
+        // first get the topic items from the first stream topic
+        StreamsBuilder streamsBuilder = new StreamsBuilder();
+        KStream<String, String> greetingStream1 = streamsBuilder
+            .stream(GREETINGS1,
+                    Consumed.with( Serdes.String(), Serdes.String()));
+        greetingStream1.print(Printed.< String, String> toSysOut().withLabel(GREETINGS));
+        
+        // Then get the topic items from the second stream topic
+        KStream<String, String> greetingStream2 = streamsBuilder
+            .stream(GREETINGS2,
+                    Consumed.with( Serdes.String(), Serdes.String()));
+        greetingStream2.print(Printed.< String, String> toSysOut().withLabel(GREETINGS2));
+
+        // Next merge the topic items into a new KStream topic
+        KStream<String, String> mergedStream = greetingStream1.merge( greetingStream2 ); //, (Named) GREETINGS2);
+        
+        mergedStream.print(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
+
+        // Then do some processing
+        KStream<String, String> modifiedKStreamValues = mergedStream
+                .filter(( key, value) -> value.length() > 5 )
+                .peek( (key, value) -> {
+                    System.out.println( "after filter " + key +":" + value );
+                })
+            .map( (key, value) -> KeyValue.pair( key.toUpperCase(), value.toUpperCase()));
+
+        modifiedKStreamValues.print(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
+
+        System.out.println( "Topic data : " + modifiedKStreamValues);
+        
+        // Then sink it
+        modifiedKStreamValues.to( GREETINGS_MERGED, 
+                Produced.with( Serdes.String(), Serdes.String()));
+
+        return streamsBuilder.build();
+    }
+
+</details>
+
+##### Serializers & Deserializers
+
+When producing and consuming event records in a regular microservice that uses a KafkaProducer and KafkaConsumer the key and value objects from the event records are serialized on the producer-end and de-serialized on the consumer-end. The same is true when using KStreams when the streams are processed in the source processors and sink processors. 
+
+You can provide Serdes(serialization) by using either of these methods, but you must use at least one of these methods:
+
+1) By setting default Serdes via a Properties instance.
+
+   - Consumer: The Source Processer is the consumer and uses:
+    
+     - Consumed.with( Serdes.String(), Serdes.String()))
+
+   - Producer: The Sink Processor is the producer and uses:
+
+     - Produce.with( Serdes.String(), Serdes.String()))
+    
+   The default serializations available in the Serde Class handle the generic serialization with the 80/20 rule of serializations where 80 % is covered. The other 20% are custom serializations. Serialization of a Kafka Event record occurs on the Producer event processing. Deserialization of a Kafka Event record occurs on the Consumer event processing. KStream serialization also support serializations with Avro Schema Serializations. 
+
+1) When specifying explicit Serdes when calling the appropriate API methods, thus overriding the defaults the api call not follow what has been set for the defaults. This option below sets the defaults for the api calls if *no* serdes is set.
+ 
+   The key and value (DE)-Serializers can be default with the Property Configs for the entire Application or they can be individually set per interactions with the Consume/Produce with options. The default is configured this way:
+ 
+   - props.put( StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
+   - props.put( StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
+ 
+
+Sink Processor: The step in which the new event record is pushed out:
+   
+   - ((KStream) modifiedKStreamValues).to ( TOPIC, Produced.with( Serdes.String(), Serdes.String()));
+  
+      
 ##### Joins
 
 When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
