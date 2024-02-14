@@ -419,7 +419,45 @@ Sink Processor: The step in which the new event record is pushed out:
    
    - ((KStream) modifiedKStreamValues).to ( TOPIC, Produced.with( Serdes.String(), Serdes.String()));
   
-      
+##### Best Practices - Serialization
+
+Creating numerous (de)serializers isn't really practical and causes scalability issues when there are many different serializers needed in a usecase. Therefore, its best to use a serializer that  employs some type of java generics to to handle the many different scenarios.
+
+So, instead doing a implementation per data type:
+
+    public class GreetingSerializer implements Serializer< Greeting > {
+    
+    @Override
+    public byte[] serialize(String topic, Greeting data) { return objectMapper.writeValueAsBytes( data ); }}
+
+    public class GreetingDeserializer implements Deserializer< Greeting > {
+    
+    @Override
+    public Greeting deserialize(String topic, byte[] data) { return objectMapper.readValue( data, Greeting.class ); }}
+    
+Make a Generic Serialization design as:
+
+    public class GenericJSONSerializer< T > implements Serializer< T > {
+    public GenericJSONSerializer(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+    public byte[] serialize(String topic, T data) {
+            return objectMapper.writeValueAsBytes( data );
+    }
+    
+    and
+    
+    public class GenericJSONDeserializer< T > implements Deserializer< T > {
+    public GenericJSONDeserializer( Class< T > deserializedClassType, ObjectMapper objectMapper ) {
+        this.deserializedClassType = deserializedClassType;
+        this.objectMapper = objectMapper;
+    }
+    @Override
+    public T deserialize(String topic, byte[] data) {
+        return objectMapper.readValue( data, deserializedClassType );
+    }    
+    
+    
 ##### Joins
 
 When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
